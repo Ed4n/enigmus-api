@@ -39,7 +39,7 @@ export const deletePlayer = async (req, res) => {
         let player = await Players.findById(req.params.id)
         if (!player) return res.status(404).json({ error: "player not found" })
         await Players.findOneAndDelete({ _id: req.params.id })
-        return res.status(200).json({ message: "player deleted" });
+        return res.status(200).json({ message: `${player.name} Deleted` });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Internal server error" });
