@@ -10,6 +10,18 @@ export const findAll = async (req, res) => {
     }
 }
 
+export const findAllHighest = async (req, res) => {
+    try {
+        // let players = await Players.find({});
+        let players = await Players.find({}).sort({ points: -1 });
+        return res.status(200).json({ players });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+
 export const create = async (req, res) => {
     try {
         let player = new Players(req.body);
