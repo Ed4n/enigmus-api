@@ -10,6 +10,16 @@ export const findAll = async (req, res) => {
     }
 }
 
+export const findRandomQuestions = async (req, res) => {
+    try {
+        const randomQuestions = await Questions.aggregate([{ $sample: { size: 10 } }]);
+        return res.status(200).json({ questions: randomQuestions });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
+
 export const create = async (req, res) => {
     try {
         let player = new Questions(req.body);
