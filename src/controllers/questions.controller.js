@@ -24,7 +24,7 @@ export const create = async (req, res) => {
     try {
         let question = new Questions(req.body);
         await question.save();
-        return res.status(200).json({ question });
+        return res.status(200).json({ question, message: "Question added succesfully!" });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Internal server error" });
@@ -37,7 +37,7 @@ export const update = async (req, res) => {
         let question = await Questions.findById(req.params.id)
         if (!question) return res.status(404).json({ error: "question not found" })
         let updateQuestion = await Questions.findByIdAndUpdate({ _id: req.params.id }, data, { new: true })
-        return res.status(200).json({ updateQuestion });
+        return res.status(200).json({ updateQuestion, message: "Question updated succesfully!" });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Internal server error" });
@@ -49,7 +49,7 @@ export const deleteQuestion = async (req, res) => {
         let question = await Questions.findById(req.params.id)
         if (!question) return res.status(404).json({ error: "Question not found :(" })
         await Questions.findOneAndDelete({ _id: req.params.id })
-        return res.status(200).json({ message: "Question deleted!" });
+        return res.status(200).json({ message: `The question: [[${question.question}]]. Was deleted succesfully!` });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Internal server error" });
