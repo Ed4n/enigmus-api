@@ -22,9 +22,9 @@ export const findRandomQuestions = async (req, res) => {
 
 export const create = async (req, res) => {
     try {
-        let player = new Questions(req.body);
-        await player.save();
-        return res.status(200).json({ player });
+        let question = new Questions(req.body);
+        await question.save();
+        return res.status(200).json({ question });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Internal server error" });
@@ -34,10 +34,10 @@ export const create = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const data = req.body
-        let player = await Questions.findById(req.params.id)
-        if (!player) return res.status(404).json({ error: "player not found" })
-        let udpateplayer = await Questions.findByIdAndUpdate({ _id: req.params.id }, data, { new: true })
-        return res.status(200).json({ udpateplayer });
+        let question = await Questions.findById(req.params.id)
+        if (!question) return res.status(404).json({ error: "question not found" })
+        let updateQuestion = await Questions.findByIdAndUpdate({ _id: req.params.id }, data, { new: true })
+        return res.status(200).json({ updateQuestion });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Internal server error" });
@@ -46,8 +46,8 @@ export const update = async (req, res) => {
 
 export const deleteQuestion = async (req, res) => {
     try {
-        let player = await Questions.findById(req.params.id)
-        if (!player) return res.status(404).json({ error: "Question not found :(" })
+        let question = await Questions.findById(req.params.id)
+        if (!question) return res.status(404).json({ error: "Question not found :(" })
         await Questions.findOneAndDelete({ _id: req.params.id })
         return res.status(200).json({ message: "Question deleted!" });
     } catch (error) {

@@ -10,5 +10,4 @@ router.patch("/:id", update);
 router.delete("/:id", deleteQuestion);
 
 
-
 export default router;
