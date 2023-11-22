@@ -3,7 +3,13 @@ import { Players } from "../models/players.model.js";
 export const findAll = async (req, res) => {
     try {
         let players = await Players.find({});
-        return res.status(200).json({ players, message: `Total Players: ${players.length.toString()}` });
+        let playeresLenght = players.length.toString();
+        return res.status(200).json({
+            success: true,
+            players,
+            message: "Players retrieved successfully",
+            playeresLenght
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Internal server error" });

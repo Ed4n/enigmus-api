@@ -3,7 +3,13 @@ import { Questions } from "../models/questions.model.js";
 export const findAll = async (req, res) => {
     try {
         let questions = await Questions.find({});
-        return res.status(200).json({ questions });
+        let questionsLenght = questions.length.toString();
+        return res.status(200).json({
+            succes: true,
+            questions,
+            message: "Questions retrieved successfully",
+            questionsLenght
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: "Internal server error" });
