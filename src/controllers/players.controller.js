@@ -6,9 +6,10 @@ export const findAll = async (req, res) => {
         let playeresLenght = players.length.toString();
         return res.status(200).json({
             success: true,
-            players,
+            data: players,
             message: "Players retrieved successfully",
-            playeresLenght
+            error: null,
+            rows: playeresLenght
         });
     } catch (error) {
         console.log(error);

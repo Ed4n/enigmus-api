@@ -6,9 +6,10 @@ export const findAll = async (req, res) => {
         let questionsLenght = questions.length.toString();
         return res.status(200).json({
             succes: true,
-            questions,
+            data: questions,
             message: "Questions retrieved successfully",
-            questionsLenght
+            error: null,
+            rows: questionsLenght
         });
     } catch (error) {
         console.log(error);
